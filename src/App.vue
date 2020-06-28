@@ -1,17 +1,47 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Setup />
+    <!-- <Setup /> -->
+    <!-- <Computed /> -->
+    <!-- <Watch /> -->
+    <Refs />
+    <button @click="increment">
+      Count is: {{ state.count }}, double is: {{ state.double }}
+    </button>
   </div>
 </template>
 
 <script>
-import Setup from './components/Setup.vue'
+// import Setup from './components/Setup.vue'
+// import Computed from './components/Computed.vue'
+// import Watch from './components/Watch.vue'
+import Refs from './components/Refs.vue'
+
+import { reactive, computed } from 'vue';
+
 
 export default {
   name: 'App',
   components: {
-    Setup
+    // Setup,
+    // Computed
+    // Watch
+    Refs
+  },
+  setup() {
+    const state = reactive({
+      count: 0,
+      double: computed(() => state.count * 2),
+    })
+
+    function increment() {
+      state.count++
+    }
+
+    return {
+      state,
+      increment,
+    }
   }
 }
 </script>
